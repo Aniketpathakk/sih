@@ -29,6 +29,7 @@ export const InstitutionPortal: React.FC<InstitutionPortalProps> = ({
   const [batchRows, setBatchRows] = useState<any[]>([]);
   const [selectedRow, setSelectedRow] = useState<any>(null);
   const [loading, setLoading] = useState(false);
+  const [apiError, setApiError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('ALL');
 
@@ -44,17 +45,26 @@ export const InstitutionPortal: React.FC<InstitutionPortalProps> = ({
 
   const fetchInstitutionData = async () => {
     setLoading(true);
+    setApiError(null);
     try {
       const instRes = await fetch(`/api/v1/institutions/${institutionId}`);
-      if (instRes.ok) setInstitution(await instRes.json());
+      if (!instRes.ok) throw new Error(`Institution request failed (${instRes.status})`);
+      const institutionData = await instRes.json();
 
       const appRes = await fetch(`/api/v1/institutions/${institutionId}/approvals`);
-      if (appRes.ok) setApprovals(await appRes.json());
+      if (!appRes.ok) throw new Error(`Approvals request failed (${appRes.status})`);
+      const approvalData = await appRes.json();
 
       const admRes = await fetch(`/api/v1/admissions?institutionId=${institutionId}`);
-      if (admRes.ok) setAdmissions(await admRes.json());
+      if (!admRes.ok) throw new Error(`Admissions request failed (${admRes.status})`);
+      const admissionData = await admRes.json();
+
+      setInstitution(institutionData);
+      setApprovals(approvalData);
+      setAdmissions(admissionData);
     } catch (e) {
       console.error(e);
+      setApiError('The demo API could not be reached. Refresh the page or check the deployment API configuration.');
     } finally {
       setLoading(false);
     }
@@ -210,11 +220,16 @@ export const InstitutionPortal: React.FC<InstitutionPortalProps> = ({
 
   return (
     <div className="p-6 max-w-7xl mx-auto space-y-6">
+      {apiError && (
+        <div role="alert" className="rounded-lg border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+          {apiError}
+        </div>
+      )}
       {/* Institution Banner */}
       <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 flex flex-wrap items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2 text-xs font-semibold text-blue-700 tracking-wider uppercase mb-1">
-            <span>AICTE Approval ID: {institution?.aicteInstitutionRef}</span>
+            <span>AICTE Approval ID: {institution?.aicteInstitutionRef || '—'}</span>
             <span>•</span>
             <span>{institution?.institutionType}</span>
           </div>

@@ -247,9 +247,14 @@ app.get('/api/v1/audit-events', (req, res) => {
   res.json(auditService.getRecent(limit));
 });
 
-// Start Server
-app.listen(port, () => {
-  console.log(`🚀 APAAR-SHIELD Backend Modular API running on http://localhost:${port}/api/v1`);
-  console.log(`🛡️  Identity Vault Initialized with AES-256-GCM and HMAC-SHA256 Tokenization`);
-});
+// Start the standalone development server locally. Vercel imports the Express
+// app as a serverless handler and must not start a second listener.
+if (!process.env.VERCEL) {
+  app.listen(port, () => {
+    console.log(`🚀 APAAR-SHIELD Backend Modular API running on http://localhost:${port}/api/v1`);
+    console.log(`🛡️  Identity Vault Initialized with AES-256-GCM and HMAC-SHA256 Tokenization`);
+  });
+}
+
+export default app;
 
