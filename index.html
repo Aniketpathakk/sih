@@ -1,0 +1,1666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AICTE Web Portal — Central Academic Identity & Student Enrolment Registry</title>
+  <link rel="stylesheet" href="assets/portal-style.css" />
+</head>
+<body>
+
+  <!-- NATIONAL TRICOLOR HAIRLINE -->
+  <div class="tricolor-stripe"></div>
+
+  <!-- TOP ACCESSIBILITY & UTILITY STRIP -->
+  <div class="gov-top-utility">
+    <div>
+      <a href="#main-content">Skip to Main Content</a> |
+      <a href="#">Screen Reader Access</a> |
+      <a href="#">Portal User Manual (PDF)</a> |
+      <a href="#">AICTE Approval Process Handbook 2024-27</a>
+    </div>
+    <div>
+      <span>Font Size:</span>
+      <button onclick="document.body.style.fontSize='12px'" style="cursor:pointer; padding:1px 4px; font-size:11px;">A-</button>
+      <button onclick="document.body.style.fontSize='13px'" style="cursor:pointer; padding:1px 4px; font-size:11px;">A</button>
+      <button onclick="document.body.style.fontSize='14px'" style="cursor:pointer; padding:1px 4px; font-size:11px;">A+</button> |
+      <span style="font-weight: bold; color: #002147; margin-left: 6px;">English</span> |
+      <span style="color: #666;">हिन्दी</span>
+    </div>
+  </div>
+
+  <!-- OFFICIAL AICTE MASTHEAD -->
+  <header class="aicte-masthead">
+    <div class="aicte-emblems">
+      <!-- National Emblem of India -->
+      <img src="assets/india-emblem.svg" alt="State Emblem of India" width="45" height="58" />
+      
+      <!-- AICTE Official Logo -->
+      <img src="assets/aicte-logo.svg" alt="AICTE Official Emblem" width="58" height="58" />
+
+      <div class="aicte-org-details">
+        <h2>अखिल भारतीय तकनीकी शिक्षा परिषद</h2>
+        <h1>ALL INDIA COUNCIL FOR TECHNICAL EDUCATION</h1>
+        <p>(A Statutory Body of the Government of India) • Ministry of Education</p>
+        <div class="aicte-subhead-title">
+          NATIONAL ACADEMIC IDENTITY (APAAR) ENROLMENT REGISTRY & MONITORING PORTAL
+        </div>
+      </div>
+    </div>
+
+    <!-- Active User & Role Console -->
+    <div class="aicte-session-badge">
+      <div class="session-row">
+        <span style="color: #555;">Academic Year:</span>
+        <span style="font-weight: bold; color: #002147;">2026-2027</span>
+        <span style="color: #cbd5e1; margin: 0 4px;">|</span>
+        <span style="color: #555;">Server Node:</span>
+        <span style="font-family: monospace; font-weight: bold;">NIC-DELHI-04</span>
+      </div>
+      <div class="session-row">
+        <span style="color: #555;">Security Token:</span>
+        <span style="font-family: monospace; font-size: 10px; color: #003366;">AICTE-VAULT-GCM-ACTIVE</span>
+      </div>
+      <div class="role-picker">
+        <label for="gov-role-selector" style="font-weight: bold; font-size: 10px; color: #555; text-transform: uppercase;">
+          Logged-In Stakeholder Entity:
+        </label>
+        <select id="gov-role-selector" onchange="switchStakeholderEntity(this.value)">
+          <option value="ALPHA" selected>Institution User: Alpha Institute of Technology (PID: 1-3324567891)</option>
+          <option value="BETA">Institution User: Beta College of Engineering (PID: 1-3324567892)</option>
+          <option value="AICTE">Regulatory Bureau Officer (Council Headquarters, New Delhi)</option>
+          <option value="VERIFIER">Authorised Verifier / Employer Background Portal</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAVIGATION TABS -->
+  <nav class="aicte-nav-container">
+    <button id="nav-tab-upload" onclick="setPortalTab('upload')" class="aicte-nav-item active">
+      1. Batch Data Submission (CSV)
+    </button>
+    <button id="nav-tab-ledger" onclick="setPortalTab('ledger')" class="aicte-nav-item">
+      2. Enrolled Student Master Register
+    </button>
+    <button id="nav-tab-matrix" onclick="setPortalTab('matrix')" class="aicte-nav-item">
+      3. Regulatory Intake & Quota Matrix (APH 2024-27)
+    </button>
+    <button id="nav-tab-cases" onclick="setPortalTab('cases')" class="aicte-nav-item">
+      4. Reconciliation & Multiple Enrolment Scrutiny (<span id="nav-cases-badge">1</span>)
+    </button>
+    <button id="nav-tab-verifier" onclick="setPortalTab('verifier')" class="aicte-nav-item">
+      5. Academic Verification & Employer Check
+    </button>
+    <button id="nav-tab-audit" onclick="setPortalTab('audit')" class="aicte-nav-item">
+      6. Security Audit & Regulatory Log
+    </button>
+  </nav>
+
+  <!-- BREADCRUMB -->
+  <div class="aicte-breadcrumb-bar">
+    <span>You are here:</span>
+    <a href="#">AICTE Web Portal</a> &raquo;
+    <a href="#">Approval Process 2026-27</a> &raquo;
+    <a href="#">Student Regulatory Data Registry</a> &raquo;
+    <span id="breadcrumb-text" style="font-weight: bold; color: #002147;">Batch Data Submission</span>
+  </div>
+
+  <!-- MAIN WORKSPACE -->
+  <main id="main-content" class="portal-main-wrapper">
+
+    <!-- STATUTORY NOTICES & LEGAL CITATION -->
+    <div class="statutory-notice-box">
+      <span class="statutory-notice-title">STATUTORY ADVISORY & COMPLIANCE MANDATE (AICTE REGULATION BUREAU)</span>
+      1. In exercise of powers conferred under Section 10(1) of the AICTE Act, 1987, all technical institutions approved by the Council are required to submit accurate, student-level admission records linked to valid APAAR identity references for Academic Session 2026-27.<br>
+      2. <strong>Intake & Category Sanctions:</strong> In accordance with the AICTE Approval Process Handbook (APH 2024–27), Non-Resident Indian (NRI) admissions shall not exceed 5% of the approved intake capacity. Foreign Nationals (FN), Overseas Citizens of India (OCI), and children of Indian workers in Gulf countries are supernumerary up to 15% with mandatory one-third sub-allocation.<br>
+      3. <strong>Data Protection:</strong> In compliance with the Digital Personal Data Protection (DPDP) Act and CERT-In guidelines, raw 12-digit APAAR identifiers are secured in the central cryptographic vault using AES-256-GCM envelope encryption and evaluated through deterministic HMAC-SHA256 matching tokens.
+    </div>
+
+    <!-- KPI METRIC CARDS -->
+    <div class="kpi-strip">
+      <div class="kpi-card">
+        <div class="kpi-title">Sanctioned Intake Capacity</div>
+        <div class="kpi-number" id="metric-intake">300</div>
+        <div class="kpi-desc">Across 4 AICTE Approved Programmes</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-title">Confirmed Enrolments</div>
+        <div class="kpi-number" id="metric-admissions" style="color: #1b5e20;">239</div>
+        <div class="kpi-desc">79% Overall Sanction Utilisation</div>
+      </div>
+      <div class="kpi-card alert-card">
+        <div class="kpi-title">Integrity Scrutiny Cases</div>
+        <div class="kpi-number" id="metric-cases" style="color: #c62828;">1</div>
+        <div class="kpi-desc">Concurrent Enrolment Under Review</div>
+      </div>
+      <div class="kpi-card warning-card">
+        <div class="kpi-title">Reported Cancellations / Withdrawals</div>
+        <div class="kpi-number" id="metric-withdrawals" style="color: #e65100;">1</div>
+        <div class="kpi-desc">Audited Lifecycle Transitions</div>
+      </div>
+    </div>
+
+
+    <!-- ========================================================================= -->
+    <!-- TAB 1: BATCH DATA SUBMISSION (CSV INGESTION & STAGING) -->
+    <!-- ========================================================================= -->
+    <section id="panel-upload" class="gov-section-panel">
+      <div class="gov-section-header">
+        <span>Section A: Institutional Batch Data Submission & Staging Validation</span>
+        <span style="font-family: monospace; font-size: 11px;">FORM REF: AICTE-SUB-2026-V1</span>
+      </div>
+      <div class="gov-section-body">
+
+        <!-- Institution Details (Standard 4-Column Gov Form Table) -->
+        <table class="table-form">
+          <colgroup>
+            <col style="width: 22%;">
+            <col style="width: 28%;">
+            <col style="width: 22%;">
+            <col style="width: 28%;">
+          </colgroup>
+          <tbody>
+            <tr>
+              <td class="label-col">Permanent Institute ID (PID):</td>
+              <td class="value-col" id="inst-pid" style="font-family: monospace; font-weight: bold; color: #002147;">1-3324567891</td>
+              <td class="label-col">Academic Session:</td>
+              <td class="value-col font-mono">2026-2027</td>
+            </tr>
+            <tr>
+              <td class="label-col">Institution Legal Name:</td>
+              <td class="value-col" id="inst-name" style="font-weight: bold; color: #002147;">
+                Alpha Institute of Technology (Autonomous), Knowledge Park
+              </td>
+              <td class="label-col">Approval Status:</td>
+              <td class="value-col"><span class="status-tag tag-pass">Extension of Approval (EoA) Granted</span></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Actions Toolbar -->
+        <div style="background-color: #f8fafc; border: 1px solid #cfd8dc; padding: 10px 14px; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+          <div>
+            <strong style="color: #002147; text-transform: uppercase; font-size: 11px;">Batch File Ingestion Controls:</strong>
+            <p style="font-size: 11px; color: #555;">Download the official AICTE data dictionary template or process the staged admission file.</p>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button onclick="downloadOfficialTemplate()" class="gov-btn gov-btn-secondary">
+              Download Approved CSV Template (.CSV)
+            </button>
+            <button onclick="processStagedBatchFile()" class="gov-btn gov-btn-primary">
+              Upload Admission Batch (.CSV)
+            </button>
+            <button id="btn-certify-batch" onclick="certifyStagedBatch()" class="gov-btn gov-btn-success">
+              Certify & Submit Valid Rows
+            </button>
+          </div>
+        </div>
+
+        <!-- Staging Batch Metadata Strip -->
+        <div style="background: #eef2f6; border: 1px solid #cfd8dc; border-bottom: none; padding: 7px 10px; font-size: 11px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+          <div>
+            <strong>Batch Identifier:</strong> <span class="font-mono" style="font-weight: bold; color: #002147;">BATCH-2026-AUG-01</span>
+            <span style="margin: 0 6px;">|</span>
+            <strong>Source File:</strong> <span class="font-mono">aicte_admissions_august.csv</span>
+            <span style="margin: 0 6px;">|</span>
+            <strong>Pre-Submission Audit:</strong> <span class="status-tag tag-warn">DISCREPANCY DETECTED</span>
+          </div>
+          <div>
+            Total Records: <strong>4</strong> | Valid: <strong style="color: #1b5e20;">2</strong> | Flagged for Rectification: <strong style="color: #c62828;">2</strong>
+          </div>
+        </div>
+
+        <!-- Staging Table -->
+        <table class="table-gov">
+          <thead>
+            <tr>
+              <th style="width: 50px; text-align: center;">Seq #</th>
+              <th>Source Record ID</th>
+              <th>Candidate Legal Name</th>
+              <th>Academic Identity Reference (APAAR)</th>
+              <th>Programme Code</th>
+              <th>Quota Category</th>
+              <th>Admission Route</th>
+              <th>Validation Status</th>
+              <th style="text-align: right; width: 150px;">Diagnostic Action</th>
+            </tr>
+          </thead>
+          <tbody id="staging-tbody">
+            <!-- Dynamically populated -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+
+    <!-- ========================================================================= -->
+    <!-- TAB 2: ENROLLED STUDENT MASTER REGISTER -->
+    <!-- ========================================================================= -->
+    <section id="panel-ledger" class="gov-section-panel hidden">
+      <div class="gov-section-header">
+        <span>Section B: Institution Master Student Enrolment Register</span>
+        <span style="font-family: monospace; font-size: 11px;">ACTIVE RECORDS: <span id="ledger-total-count">130</span></span>
+      </div>
+      <div class="gov-section-body">
+        <!-- Search and Filter Bar -->
+        <div style="background: #eef2f6; border: 1px solid #cfd8dc; border-bottom: none; padding: 7px 10px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <input type="text" id="ledger-search-box" oninput="filterLedgerRecords()" placeholder="Search Student Name, Masked APAAR, Programme..." class="form-ctrl" style="width: 280px;" />
+            <select id="ledger-filter-box" onchange="filterLedgerRecords()" class="form-ctrl" style="width: 140px;">
+              <option value="ALL">All Statuses</option>
+              <option value="CONFIRMED">CONFIRMED</option>
+              <option value="WITHDRAWN">WITHDRAWN</option>
+            </select>
+          </div>
+          <div style="font-size: 11px; color: #555;">
+            Displaying permanent admission entries for AY 2026-27
+          </div>
+        </div>
+
+        <!-- Ledger Table -->
+        <table class="table-gov">
+          <thead>
+            <tr>
+              <th>Candidate Full Name</th>
+              <th>APAAR Identifier (Masked)</th>
+              <th>Programme / Course</th>
+              <th>Quota Category</th>
+              <th>Admission Route</th>
+              <th>Current Status</th>
+              <th>Admission Date</th>
+              <th style="text-align: right;">Administrative Action</th>
+            </tr>
+          </thead>
+          <tbody id="ledger-tbody">
+            <!-- Dynamically populated -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+
+    <!-- ========================================================================= -->
+    <!-- TAB 3: REGULATORY INTAKE & QUOTA MATRIX (APH 2024-27) -->
+    <!-- ========================================================================= -->
+    <section id="panel-matrix" class="gov-section-panel hidden">
+      <div class="gov-section-header">
+        <span>Section C: AICTE Approved Intake & Category-Specific Seat Rule Matrix</span>
+        <span style="font-family: monospace; font-size: 11px;">STATUTORY SPECIFICATION: APH 2024–27</span>
+      </div>
+      <div class="gov-section-body">
+        <p style="font-size: 11px; color: #555; margin-bottom: 12px;">
+          Deterministic evaluation of institutional admission numbers against the approved intake sanctioned under AICTE Extension of Approval (EoA). Evaluates Section 2.1 (Sanctioned Intake), Clause 2.11 (5% NRI Ceiling within Intake), Clause 2.12 (15% Supernumerary FN/OCI with 1/3 Gulf Wards Reservation), and Clause 2.14 (Lateral Entry Cohort Isolation).
+        </p>
+
+        <table class="table-gov">
+          <thead>
+            <tr>
+              <th>Programme & Approved Technical Institution</th>
+              <th style="text-align: right;">Sanctioned Intake</th>
+              <th style="text-align: right;">Confirmed Enrolments</th>
+              <th>Intake Utilisation</th>
+              <th style="text-align: center;">NRI Quota (Max 5% within Intake)</th>
+              <th style="text-align: center;">Supernumerary (Max 15% FN/OCI)</th>
+              <th>Lateral Entry (2nd Yr)</th>
+              <th>Regulatory Compliance Status</th>
+            </tr>
+          </thead>
+          <tbody id="matrix-tbody">
+            <!-- Dynamically populated -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+
+    <!-- ========================================================================= -->
+    <!-- TAB 4: RECONCILIATION & MULTIPLE ENROLMENT SCRUTINY -->
+    <!-- ========================================================================= -->
+    <section id="panel-cases" class="gov-section-panel hidden">
+      <div class="gov-section-header">
+        <span>Section D: National Reconciliation & Cross-Institution Investigation Cases</span>
+        <span style="font-family: monospace; font-size: 11px;">AICTE INVARIANT 10: HUMAN SCRUTINY MANDATORY</span>
+      </div>
+      <div class="gov-section-body">
+        <p style="font-size: 11px; color: #555; margin-bottom: 12px;">
+          Cases identified through deterministic HMAC identity matching where the same academic identity reference appears in multiple institutional admission rolls during overlapping academic sessions. In compliance with AICTE Invariant 10 and UGC Simultaneous Degree Guidelines, cases require regulatory officer adjudication before any adverse action is determined.
+        </p>
+
+        <div id="cases-wrapper">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================================================= -->
+    <!-- TAB 5: ACADEMIC VERIFICATION & EMPLOYER CHECK -->
+    <!-- ========================================================================= -->
+    <section id="panel-verifier" class="gov-section-panel hidden">
+      <div class="gov-section-header">
+        <span>Section E: Purpose-Limited Academic Credential Verification Service</span>
+        <span style="font-family: monospace; font-size: 11px;">DPDP ACT & CERT-In COMPLIANT SCOPED DISCLOSURE</span>
+      </div>
+      <div class="gov-section-body">
+        <!-- Verification Request Form Box -->
+        <div style="background-color: #f8fafc; border: 1px solid #cfd8dc; padding: 12px 14px; margin-bottom: 16px;">
+          <h4 style="font-size: 12px; font-weight: bold; color: #002147; text-transform: uppercase; margin-bottom: 6px;">
+            Initiate Purpose-Bound Academic Verification Request
+          </h4>
+          <p style="font-size: 11px; color: #555; margin-bottom: 10px;">
+            Authorised government departments, public employers, scholarship bodies, and verifying organisations may verify the authenticity of an admission claim. Under India's Digital Personal Data Protection (DPDP) Act, verifiers receive only approved minimal claims. Full student identity profiles, Aadhaar numbers, and demographic data are strictly withheld.
+          </p>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px;">
+            <div>
+              <label class="form-label" style="display: block; font-size: 11px; font-weight: bold; margin-bottom: 3px;">
+                Verifier Organisation Name:
+              </label>
+              <input type="text" id="vf-org-input" value="Tata Consultancy Services Ltd. (HR Talent Acquisition)" class="form-ctrl" />
+            </div>
+
+            <div>
+              <label class="form-label" style="display: block; font-size: 11px; font-weight: bold; margin-bottom: 3px;">
+                Authorised Statutory Purpose:
+              </label>
+              <select id="vf-purpose-select" class="form-ctrl">
+                <option value="EMPLOYMENT_BACKGROUND_CHECK">EMPLOYMENT_BACKGROUND_CHECK (Pre-Hire Background Verification)</option>
+                <option value="SCHOLARSHIP_VALIDATION">SCHOLARSHIP_VALIDATION (Government Direct Benefit Transfer / State Scholarship)</option>
+                <option value="HIGHER_ED_ADMISSION">HIGHER_ED_ADMISSION (Post-Graduate Academic Enrolment Verification)</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="form-label" style="display: block; font-size: 11px; font-weight: bold; margin-bottom: 3px;">
+                Candidate Reference Token:
+              </label>
+              <input type="text" id="vf-ref-input" value="STU-0042" class="form-ctrl font-mono" />
+            </div>
+          </div>
+
+          <div style="text-align: right; margin-top: 10px;">
+            <button onclick="executeVerificationCheck()" class="gov-btn gov-btn-primary">
+              Query & Issue Authorised Verification Certificate
+            </button>
+          </div>
+        </div>
+
+        <!-- Official Academic Certificate Card -->
+        <div id="cert-official-document" style="border: 2px solid #002147; background: #ffffff; padding: 18px; position: relative;">
+          
+          <!-- Top Certificate Masthead -->
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #002147; padding-bottom: 12px; margin-bottom: 14px;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <img src="assets/india-emblem.svg" alt="India Emblem" width="40" height="52" />
+              <div>
+                <div style="font-size: 11px; font-weight: bold; color: #555; text-transform: uppercase;">
+                  Ministry of Education • Government of India
+                </div>
+                <h3 style="font-size: 16px; color: #002147; font-weight: 800; text-transform: uppercase;">
+                  Certificate of Academic Enrolment Verification
+                </h3>
+                <div style="font-size: 10px; font-family: monospace; color: #003366;">
+                  REGULATORY RECORD REFERENCE: AICTE/ENR/2026/CERT-990142
+                </div>
+              </div>
+            </div>
+
+            <div style="text-align: right;">
+              <img src="assets/gov-seal.svg" alt="Government Digital Seal" width="85" height="85" />
+            </div>
+          </div>
+
+          <!-- Certificate Claims Grid (Government 4-Column Table) -->
+          <table class="table-form">
+            <colgroup>
+              <col style="width: 24%;">
+              <col style="width: 26%;">
+              <col style="width: 24%;">
+              <col style="width: 26%;">
+            </colgroup>
+            <tbody>
+              <tr>
+                <td class="label-col">Candidate Legal Name:</td>
+                <td class="value-col" style="font-weight: bold;" id="cert-candidate-name">Aarav Sharma</td>
+                <td class="label-col">Subject Token Reference:</td>
+                <td class="value-col font-mono" id="cert-candidate-token">STU-0042</td>
+              </tr>
+              <tr>
+                <td class="label-col">Approved Technical Institution:</td>
+                <td colspan="3" id="cert-inst-name" style="font-weight: bold; color: #002147; background-color: #ffffff;">
+                  Alpha Institute of Technology (Autonomous), Knowledge Park (PID: 1-3324567891)
+                </td>
+              </tr>
+              <tr>
+                <td class="label-col">Sanctioned Programme:</td>
+                <td class="value-col" style="font-weight: bold;" id="cert-prog-name">B.Tech Computer Science and Engineering</td>
+                <td class="label-col">Academic Session:</td>
+                <td class="value-col font-mono">2026-2027</td>
+              </tr>
+              <tr>
+                <td class="label-col">Verification Requestor:</td>
+                <td class="value-col" id="cert-requestor-org">Tata Consultancy Services Ltd.</td>
+                <td class="label-col">Enrolment Status:</td>
+                <td class="value-col"><span class="status-tag tag-pass">CONFIRMED ADMISSION</span></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Digital Seal & QR Code Block -->
+          <div style="background-color: #f8fafc; border: 1px solid #b0bec5; padding: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+            <div style="font-size: 11px;">
+              <div style="font-weight: bold; color: #002147; text-transform: uppercase;">
+                Cryptographic Integrity Verification Seal (HMAC-SHA256):
+              </div>
+              <div class="font-mono" style="font-size: 10px; color: #2d3748; word-break: break-all; max-width: 650px; margin-top: 2px;">
+                SIG-SHA256-8f3a9e1b4c7d0a2f5e8b6c9d1a4f7e2b3c5d8a0f1e4b7c8d2a3f6e8b9c1d4a6
+              </div>
+              <div style="font-size: 10px; color: #718096; margin-top: 4px;">
+                Digitally authenticated against the AICTE central academic vault • Valid under Section 6(9) of DPDP Framework.
+              </div>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <img src="assets/qr-code.svg" alt="Verification QR Code" width="65" height="65" style="border: 1px solid #002147; padding: 2px; background: #fff;" />
+              <button onclick="window.print()" class="gov-btn gov-btn-secondary gov-btn-sm no-print">
+                Print Official Certificate
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================================================= -->
+    <!-- TAB 6: SECURITY AUDIT & REGULATORY LOG -->
+    <!-- ========================================================================= -->
+    <section id="panel-audit" class="gov-section-panel hidden">
+      <div class="gov-section-header">
+        <span>Section F: Regulatory Audit Trail & Data Processing History</span>
+        <span style="font-family: monospace; font-size: 11px;">STATUTORY COMPLIANCE: CERT-In 180-DAY RETENTION</span>
+      </div>
+      <div class="gov-section-body">
+        <p style="font-size: 11px; color: #555; margin-bottom: 12px;">
+          Append-only security log recording administrative modifications, batch certifications, admission lifecycle transitions, and regulatory case adjudications. Personal identity attributes are strictly redacted prior to logging.
+        </p>
+
+        <table class="table-gov">
+          <thead>
+            <tr>
+              <th style="width: 150px;">Event Timestamp (UTC)</th>
+              <th style="width: 140px;">Authenticated Entity</th>
+              <th style="width: 180px;">Action Classification</th>
+              <th style="width: 180px;">Target Resource</th>
+              <th>Audited Event Metadata (Redacted)</th>
+            </tr>
+          </thead>
+          <tbody id="audit-tbody" class="font-mono">
+            <!-- Dynamically populated -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: ROW VALIDATION DIAGNOSTIC -->
+  <!-- ========================================================================= -->
+  <div id="modal-diagnostic" class="modal-overlay hidden">
+    <div class="modal-window">
+      <div class="modal-bar">
+        <span>Staging Validation Diagnostic Details</span>
+        <button onclick="closeModal('modal-diagnostic')">&times;</button>
+      </div>
+      <div class="modal-content-area">
+        <table class="table-form" style="margin-bottom: 12px;">
+          <colgroup>
+            <col style="width: 32%;">
+            <col style="width: 68%;">
+          </colgroup>
+          <tbody>
+            <tr>
+              <td class="label-col">Candidate Legal Name:</td>
+              <td class="value-col" style="font-weight: bold;" id="diag-name">Candidate Name</td>
+            </tr>
+            <tr>
+              <td class="label-col">Source Record Identifier:</td>
+              <td class="value-col font-mono" id="diag-src-id">DEMO-ADM-03</td>
+            </tr>
+            <tr>
+              <td class="label-col">Submitted APAAR Value:</td>
+              <td class="value-col font-mono" style="font-weight: bold; color: #c62828;" id="diag-val">90000000000X</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div style="background-color: #ffebee; border: 1px solid #ef9a9a; border-left: 4px solid #c62828; padding: 10px; margin-bottom: 12px;">
+          <div style="font-size: 11px; font-weight: bold; color: #b71c1c; text-transform: uppercase;">
+            Rule Code: <span id="diag-err-code">INVALID_APAAR_FORMAT</span>
+          </div>
+          <div id="diag-err-msg" style="font-size: 12px; color: #212529; margin-top: 2px;">
+            The submitted value does not conform to the 12-digit numeric academic account format.
+          </div>
+        </div>
+
+        <div style="background-color: #e8f0fe; border: 1px solid #bbdefb; padding: 8px; font-size: 11px; color: #0d47a1;">
+          <strong>Correction Procedure:</strong> Re-verify the candidate's APAAR reference with the institution's official admission registration counter. APAAR issued by the Ministry of Education contains exactly 12 numeric digits.
+        </div>
+      </div>
+      <div class="modal-btn-bar">
+        <button onclick="closeModal('modal-diagnostic')" class="gov-btn gov-btn-secondary">Close Diagnostic</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: RECORD STUDENT WITHDRAWAL -->
+  <!-- ========================================================================= -->
+  <div id="modal-withdrawal" class="modal-overlay hidden">
+    <div class="modal-window">
+      <div class="modal-bar" style="background-color: #b71c1c;">
+        <span>Record Official Student Withdrawal (AICTE Clause 11)</span>
+        <button onclick="closeModal('modal-withdrawal')">&times;</button>
+      </div>
+      <div class="modal-content-area">
+        <p style="font-size: 11px; color: #555; margin-bottom: 10px;">
+          In accordance with AICTE Invariant 11, recording a student withdrawal appends an immutable lifecycle event to the audit trail. Historical admission records are permanently retained for regulatory cut-off accounting.
+        </p>
+
+        <table class="table-form" style="margin-bottom: 12px;">
+          <colgroup>
+            <col style="width: 30%;">
+            <col style="width: 70%;">
+          </colgroup>
+          <tbody>
+            <tr>
+              <td class="label-col">Candidate Name:</td>
+              <td class="value-col" style="font-weight: bold;" id="wd-candidate-name">Priya Patel</td>
+            </tr>
+            <tr>
+              <td class="label-col">APAAR Reference:</td>
+              <td class="value-col font-mono" id="wd-candidate-apaar">XXXXXXXX0130</td>
+            </tr>
+            <tr>
+              <td class="label-col">Programme:</td>
+              <td class="value-col font-mono" style="font-weight: bold; color: #002147;" id="wd-candidate-prog">BTECH-CSE</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div style="margin-bottom: 10px;">
+          <label style="display: block; font-size: 11px; font-weight: bold; text-transform: uppercase; margin-bottom: 3px;">
+            Official Reason for Cancellation / Withdrawal:
+          </label>
+          <textarea id="wd-reason-text" rows="3" class="form-ctrl">Candidate accepted central counselling seat allotment at National Institute of Technology (NIT) under CSAB round.</textarea>
+        </div>
+      </div>
+      <div class="modal-btn-bar">
+        <button onclick="closeModal('modal-withdrawal')" class="gov-btn gov-btn-secondary">Cancel</button>
+        <button onclick="confirmStudentWithdrawal()" class="gov-btn gov-btn-danger">Confirm & Commit Withdrawal</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: REGULATORY ADJUDICATION ORDER -->
+  <!-- ========================================================================= -->
+  <div id="modal-case-adjudicate" class="modal-overlay hidden">
+    <div class="modal-window" style="max-width: 720px;">
+      <div class="modal-bar">
+        <span>Regulatory Scrutiny: Potential Concurrent Enrolment</span>
+        <button onclick="closeModal('modal-case-adjudicate')">&times;</button>
+      </div>
+      <div class="modal-content-area">
+        <p style="font-size: 11px; color: #555; margin-bottom: 10px;">
+          Regulatory scrutiny required under UGC Guidelines for Pursuing Two Academic Programmes Simultaneously (April 2022). An official finding must cite statutory reasoning.
+        </p>
+
+        <table class="table-form" style="margin-bottom: 12px;">
+          <colgroup>
+            <col style="width: 25%;">
+            <col style="width: 25%;">
+            <col style="width: 25%;">
+            <col style="width: 25%;">
+          </colgroup>
+          <tbody>
+            <tr>
+              <td class="label-col">Candidate Subject:</td>
+              <td class="value-col" style="font-weight: bold; color: #002147;">Aryan Sharma</td>
+              <td class="label-col">Protected APAAR Token:</td>
+              <td class="value-col font-mono" style="font-weight: bold;">XXXXXXXX0300</td>
+            </tr>
+            <tr>
+              <td class="label-col">Institution A:</td>
+              <td colspan="3" style="color: #002147; font-weight: bold; background-color: #ffffff;">
+                Alpha Institute of Technology (B.Tech CSE - Day Shift)
+              </td>
+            </tr>
+            <tr>
+              <td class="label-col">Institution B:</td>
+              <td colspan="3" style="color: #4a148c; font-weight: bold; background-color: #ffffff;">
+                Beta College of Engineering (B.Tech CSE - Evening/Part-Time Shift)
+              </td>
+            </tr>
+            <tr>
+              <td class="label-col">Statutory Reference:</td>
+              <td colspan="3" style="font-style: italic; color: #37474f; background-color: #ffffff;">
+                UGC Simultaneous Academic Programmes Notification (No. 1-6/2007(CPP-II)) / AICTE Invariant 10
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div style="margin-bottom: 10px;">
+          <label style="display: block; font-size: 11px; font-weight: bold; text-transform: uppercase; margin-bottom: 3px;">
+            Regulatory Adjudicator Findings & Orders:
+          </label>
+          <textarea id="case-decision-input" rows="3" class="form-ctrl">Verified institution class timetable and admission records: Candidate is pursuing permissible physical and distance mode courses in separate timing shifts in compliance with UGC Guidelines.</textarea>
+        </div>
+      </div>
+      <div class="modal-btn-bar">
+        <button onclick="adjudicateRegulatoryCase('FALSE_POSITIVE')" class="gov-btn gov-btn-success">
+          Mark False Positive (Permitted Concurrency)
+        </button>
+        <button onclick="adjudicateRegulatoryCase('CORRECTION_REQUESTED')" class="gov-btn gov-btn-secondary">
+          Request Institution Clarification
+        </button>
+        <button onclick="adjudicateRegulatoryCase('RESOLVED')" class="gov-btn gov-btn-danger">
+          Confirm Violation & Issue Notice
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: OFFICIAL COUNCIL ORDER & ACKNOWLEDGEMENT RECEIPT -->
+  <!-- ========================================================================= -->
+  <div id="modal-gov-acknowledgement" class="modal-overlay hidden">
+    <div class="modal-window" style="max-width: 660px;">
+      <div class="modal-bar" style="background-color: #002147; border-bottom: 2px solid #ff9933;">
+        <span id="gov-ack-title" style="letter-spacing: 0.3px;">AICTE STATUTORY REGULATION BUREAU — OFFICIAL ORDER</span>
+        <button onclick="closeModal('modal-gov-acknowledgement')">&times;</button>
+      </div>
+      <div class="modal-content-area" style="padding: 16px 20px;">
+        <!-- Header Banner with Emblem and Stamp -->
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #002147; padding-bottom: 12px; margin-bottom: 14px;">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <img src="assets/india-emblem.svg" alt="National Emblem" style="height: 48px;">
+            <div>
+              <div style="font-size: 13px; font-weight: bold; color: #002147; text-transform: uppercase;">
+                All India Council for Technical Education
+              </div>
+              <div style="font-size: 11px; color: #555;">
+                Ministry of Education, Government of India • National Academic Integrity Platform
+              </div>
+              <div style="font-size: 10px; color: #138808; font-weight: bold; margin-top: 2px;">
+                DPDP ACT SECTION 6(9) VERIFIED AUDIT PROVENANCE
+              </div>
+            </div>
+          </div>
+          <img src="assets/gov-seal.svg" alt="Official Seal" style="height: 52px; opacity: 0.95;">
+        </div>
+
+        <!-- Receipt / Tracking Metadata Box -->
+        <div style="background-color: #f1f5f9; border: 1px solid #cfd8dc; padding: 8px 12px; margin-bottom: 14px; font-size: 11px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+          <div>
+            <span style="color: #64748b; font-weight: bold;">DISPATCH REFERENCE:</span>
+            <span id="gov-ack-ref" class="font-mono" style="font-weight: bold; color: #002147; margin-left: 4px;">REG-ORDER-2026-904128</span>
+          </div>
+          <div>
+            <span style="color: #64748b; font-weight: bold;">TIMESTAMP:</span>
+            <span id="gov-ack-time" class="font-mono" style="color: #334155; margin-left: 4px;">2026-10-31 01:05:00 IST</span>
+          </div>
+        </div>
+
+        <!-- Primary Status Heading Box -->
+        <div id="gov-ack-heading-box" style="background-color: #e8f5e9; border: 1px solid #a5d6a7; border-left: 5px solid #2e7d32; padding: 10px 14px; margin-bottom: 14px;">
+          <div id="gov-ack-heading" style="font-size: 13px; font-weight: bold; color: #1b5e20; text-transform: uppercase;">
+            Adjudication Order Issued: CORRECTION_REQUESTED
+          </div>
+          <div style="font-size: 11px; color: #37474f; margin-top: 2px;">
+            Formal regulatory decree has been securely committed to the National Academic Ledger.
+          </div>
+        </div>
+
+        <!-- Detailed Body Content -->
+        <div id="gov-ack-body" style="font-size: 12px; line-height: 1.6; color: #212529; background: #ffffff; border: 1px solid #e2e8f0; padding: 12px; margin-bottom: 14px;">
+          <!-- Injected dynamically -->
+        </div>
+
+        <!-- Statutory Note -->
+        <div style="font-size: 10.5px; color: #64748b; line-height: 1.4; border-top: 1px dotted #cbd5e1; padding-top: 8px;">
+          <strong>Statutory Enforceability:</strong> This document represents an authentic electronic administrative record generated under the Information Technology Act, 2000 and Section 4 of the AICTE Act (No. 52 of 1987). No physical signature required.
+        </div>
+      </div>
+      <div class="modal-btn-bar" style="background-color: #f8fafc; border-top: 1px solid #cbd5e1; padding: 10px 16px; display: flex; justify-content: space-between; align-items: center;">
+        <button onclick="window.print()" class="gov-btn gov-btn-secondary" style="font-size: 11px;">
+          Print Order / Save PDF
+        </button>
+        <button onclick="closeModal('modal-gov-acknowledgement')" class="gov-btn gov-btn-primary" style="padding: 6px 20px; font-weight: bold;">
+          Acknowledge & Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- OFFICIAL FOOTER -->
+  <footer class="aicte-masthead" style="background-color: #002147; color: #ffffff; border-top: 3px solid #ff9933; margin-top: 30px; padding: 20px;">
+    <div style="width: 100%;">
+      <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 10px; font-size: 11px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px;">
+        <a href="#" style="color: #fff; text-decoration: none;">About AICTE</a> |
+        <a href="#" style="color: #fff; text-decoration: none;">Approval Process Handbook 2024-2027</a> |
+        <a href="#" style="color: #fff; text-decoration: none;">Academic Bank of Credits (ABC)</a> |
+        <a href="#" style="color: #fff; text-decoration: none;">National Academic Depository (NAD)</a> |
+        <a href="#" style="color: #fff; text-decoration: none;">NATS Portal</a> |
+        <a href="#" style="color: #fff; text-decoration: none;">DPDP Act Disclosures</a> |
+        <a href="#" style="color: #fff; text-decoration: none;">CERT-In Cyber Security Incident Reporting</a>
+      </div>
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; font-size: 11px; color: #cbd5e1;">
+        <div>
+          Website Content Managed by <strong>All India Council for Technical Education (AICTE)</strong>, Ministry of Education, Government of India.<br>
+          Hosted on National Cloud Infrastructure. Application Framework: SIH26263 National Integrity Platform.
+        </div>
+        <div style="text-align: right; font-family: monospace;">
+          Last Updated: 31 October 2026 | Portal Version: 4.8.2-PROD<br>
+          Copyright &copy; 2026 All India Council for Technical Education. All Rights Reserved.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================= -->
+  <!-- JAVASCRIPT REGULATORY SYSTEM STORE & CONTROLLERS -->
+  <!-- ========================================================================= -->
+  <script>
+    const SYSTEM_STATE = {
+      activeRole: 'ALPHA', // ALPHA | BETA | AICTE | VERIFIER
+      activeTab: 'upload', // upload | ledger | matrix | cases | verifier | audit
+
+      institutions: {
+        ALPHA: {
+          id: 'inst-alpha-001',
+          pid: '1-3324567891',
+          name: 'Alpha Institute of Technology (Autonomous), Knowledge Park',
+          sanctionedIntake: 180,
+        },
+        BETA: {
+          id: 'inst-beta-002',
+          pid: '1-3324567892',
+          name: 'Beta College of Engineering & Research, City Campus',
+          sanctionedIntake: 60,
+        }
+      },
+
+      admissions: [],
+      stagedBatch: null,
+      cases: [],
+      auditLogs: [],
+      pendingWdId: null
+    };
+
+    // Realistic Indian student master database
+    const INDIAN_STUDENT_NAMES = [
+      "Aarav Sharma", "Priya Patel", "Vikramaditya Rao", "Ananya Deshmukh",
+      "Mohammed Zaid Khan", "Gurpreet Singh", "Kavitha Radhakrishnan", "Rohan Verma",
+      "Sneha Kulkarni", "Tenzin Norbu", "Manish Tiwari", "Deepika Sundaram",
+      "Aditya Joshi", "Pooja Hegde", "Rahul Nair", "Simran Kaur",
+      "Karan Mehta", "Swati Bhattacharya", "Harshvardhan Rathore", "Divya Pillai"
+    ];
+
+    function initPortalData() {
+      SYSTEM_STATE.admissions = [];
+      SYSTEM_STATE.cases = [];
+      SYSTEM_STATE.auditLogs = [];
+
+      // Alpha CSE (110 General/OBC + 7 NRI to trigger APH Clause 2.11 overflow + 12 FN/OCI + 1 Withdrawn)
+      for (let i = 1; i <= 110; i++) {
+        const studentName = INDIAN_STUDENT_NAMES[i % INDIAN_STUDENT_NAMES.length] + ` (Roll #${1000 + i})`;
+        SYSTEM_STATE.admissions.push({
+          id: `ADM-ALPHA-${i}`,
+          instId: 'ALPHA',
+          name: studentName,
+          apaarMasked: `XXXXXXXX${String(i).padStart(4, '0')}`,
+          prog: 'BTECH-CSE',
+          category: i % 2 === 0 ? 'GENERAL' : 'OBC_NCL',
+          route: 'STATE_COUNSELLING',
+          status: 'CONFIRMED',
+          date: '2026-08-10'
+        });
+      }
+
+      // Planted Scenario T10: 7 NRI students (exceeds 5% of 120 = 6 seats allowed under APH Clause 2.11)
+      for (let i = 111; i <= 117; i++) {
+        SYSTEM_STATE.admissions.push({
+          id: `ADM-ALPHA-${i}`,
+          instId: 'ALPHA',
+          name: `Rohan Verma (NRI Quota - Seat #${i - 110})`,
+          apaarMasked: `XXXXXXXX${String(i).padStart(4, '0')}`,
+          prog: 'BTECH-CSE',
+          category: 'NRI',
+          route: 'NRI',
+          status: 'CONFIRMED',
+          date: '2026-08-11'
+        });
+      }
+
+      // Supernumerary FN/OCI & Gulf Wards (12 admissions)
+      for (let i = 118; i <= 129; i++) {
+        SYSTEM_STATE.admissions.push({
+          id: `ADM-ALPHA-${i}`,
+          instId: 'ALPHA',
+          name: i <= 125 ? `Kavitha Radhakrishnan (FN Quota #${i - 117})` : `Zaid Khan (Gulf Worker Ward #${i - 125})`,
+          apaarMasked: `XXXXXXXX${String(i).padStart(4, '0')}`,
+          prog: 'BTECH-CSE',
+          category: i <= 125 ? 'FN' : 'GULF_WORKER',
+          route: 'FN_OCI_GULF',
+          status: 'CONFIRMED',
+          date: '2026-08-12'
+        });
+      }
+
+      // Planted Scenario T14: Withdrawal Event
+      SYSTEM_STATE.admissions.push({
+        id: 'ADM-ALPHA-130',
+        instId: 'ALPHA',
+        name: 'Priya Patel (Admitted & Later Withdrawn)',
+        apaarMasked: 'XXXXXXXX0130',
+        prog: 'BTECH-CSE',
+        category: 'GENERAL',
+        route: 'STATE_COUNSELLING',
+        status: 'WITHDRAWN',
+        date: '2026-08-10'
+      });
+
+      // Beta College (50 students)
+      for (let i = 131; i <= 180; i++) {
+        const studentName = INDIAN_STUDENT_NAMES[i % INDIAN_STUDENT_NAMES.length] + ` (Beta #${i})`;
+        SYSTEM_STATE.admissions.push({
+          id: `ADM-BETA-${i}`,
+          instId: 'BETA',
+          name: studentName,
+          apaarMasked: `XXXXXXXX${String(i).padStart(4, '0')}`,
+          prog: 'BTECH-CSE',
+          category: 'GENERAL',
+          route: 'STATE_COUNSELLING',
+          status: 'CONFIRMED',
+          date: '2026-08-10'
+        });
+      }
+
+      // Planted Scenario T16: Concurrent Enrolment (Aryan Sharma enrolled at Alpha & Beta)
+      SYSTEM_STATE.admissions.push({
+        id: 'ADM-CONFLICT-ALPHA',
+        instId: 'ALPHA',
+        name: 'Aryan Sharma',
+        apaarMasked: 'XXXXXXXX0300',
+        prog: 'BTECH-CSE',
+        category: 'GENERAL',
+        route: 'STATE_COUNSELLING',
+        status: 'CONFIRMED',
+        date: '2026-08-08'
+      });
+
+      SYSTEM_STATE.admissions.push({
+        id: 'ADM-CONFLICT-BETA',
+        instId: 'BETA',
+        name: 'Aryan Sharma',
+        apaarMasked: 'XXXXXXXX0300',
+        prog: 'BTECH-CSE',
+        category: 'GENERAL',
+        route: 'STATE_COUNSELLING',
+        status: 'CONFIRMED',
+        date: '2026-08-09'
+      });
+
+      // Planted Scrutiny Case
+      SYSTEM_STATE.cases.push({
+        id: 'CASE-CONCURRENT-001',
+        caseType: 'POSSIBLE_CONCURRENT_ENROLMENT',
+        severity: 'HIGH',
+        status: 'OPEN',
+        studentMaskedName: 'Aryan Sharma',
+        apaarMasked: 'XXXXXXXX0300',
+        institutionNameA: 'Alpha Institute of Technology (B.Tech CSE - Day Shift)',
+        institutionNameB: 'Beta College of Engineering (B.Tech CSE - Evening Shift)',
+        evidenceSummary: 'Active concurrent enrolment detected between Alpha Institute and Beta College for AY 2026-27. Adjudication required under UGC Simultaneous Academic Programme Guidelines.',
+        policyClauseRef: 'UGC Notification No. 1-6/2007(CPP-II) / AICTE Invariant 10',
+        createdAt: '2026-08-15 09:30:00'
+      });
+
+      // Initial Staged Batch for Alpha
+      SYSTEM_STATE.stagedBatch = {
+        id: 'BATCH-2026-AUG-01',
+        fileName: 'aicte_admissions_august.csv',
+        status: 'VALIDATED_WITH_ISSUES',
+        rows: [
+          {
+            rowNumber: 1,
+            sourceRecordId: 'ADM-2026-001',
+            studentName: 'Vikramaditya Rao',
+            apaarRaw: '900000005001',
+            apaarMasked: 'XXXXXXXX5001',
+            programmeCode: 'BTECH-CSE',
+            seatCategory: 'GENERAL',
+            route: 'STATE_COUNSELLING',
+            status: 'VALID',
+            issues: []
+          },
+          {
+            rowNumber: 2,
+            sourceRecordId: 'ADM-2026-002',
+            studentName: 'Ananya Deshmukh',
+            apaarRaw: '900000005002',
+            apaarMasked: 'XXXXXXXX5002',
+            programmeCode: 'BTECH-CSE',
+            seatCategory: 'OBC_NCL',
+            route: 'STATE_COUNSELLING',
+            status: 'VALID',
+            issues: []
+          },
+          {
+            rowNumber: 3,
+            sourceRecordId: 'ADM-2026-003',
+            studentName: 'Deepika Sundaram',
+            apaarRaw: '90000000000X',
+            apaarMasked: 'XXXXXXXX000X',
+            programmeCode: 'BTECH-CSE',
+            seatCategory: 'GENERAL',
+            route: 'STATE_COUNSELLING',
+            status: 'ERROR',
+            issues: [{
+              code: 'INVALID_APAAR_FORMAT',
+              column: 'apaar_reference',
+              msg: "The submitted identifier '90000000000X' is not a 12-digit numeric value."
+            }]
+          },
+          {
+            rowNumber: 4,
+            sourceRecordId: 'ADM-2026-004',
+            studentName: 'Vikramaditya Rao (Duplicate Entry)',
+            apaarRaw: '900000005001',
+            apaarMasked: 'XXXXXXXX5001',
+            programmeCode: 'BTECH-CSE',
+            seatCategory: 'GENERAL',
+            route: 'STATE_COUNSELLING',
+            status: 'DUPLICATE',
+            issues: [{
+              code: 'BATCH_DUPLICATE_ROW',
+              column: 'apaar_reference',
+              msg: "Duplicate APAAR reference matches Row #1 in this batch file."
+            }]
+          }
+        ]
+      };
+
+      // Seed Audit Logs
+      SYSTEM_STATE.auditLogs = [
+        {
+          time: '2026-08-25 14:30:00',
+          role: 'INSTITUTE_ADMIN',
+          action: 'ADMISSION_WITHDRAWAL',
+          target: 'admissions:ADM-ALPHA-130',
+          details: '{"previousStatus":"CONFIRMED","newStatus":"WITHDRAWN","reason":"CSAB national round allotment"}'
+        },
+        {
+          time: '2026-08-15 09:30:00',
+          role: 'REGULATION_ENGINE',
+          action: 'RECONCILIATION_CASE_OPENED',
+          target: 'cases:CASE-CONCURRENT-001',
+          details: '{"caseType":"POSSIBLE_CONCURRENT_ENROLMENT","apaarMasked":"XXXXXXXX0300"}'
+        },
+        {
+          time: '2026-08-10 11:00:00',
+          role: 'INSTITUTE_ADMIN',
+          action: 'BATCH_CERTIFIED',
+          target: 'submission_batches:BATCH-SEED-01',
+          details: '{"committedRows":128,"certifiedBy":"Principal / Head of Institution"}'
+        }
+      ];
+
+      renderPortalWorkspace();
+    }
+
+    // Navigation and Role routing
+    function switchStakeholderEntity(role) {
+      SYSTEM_STATE.activeRole = role;
+
+      if (role === 'AICTE') {
+        setPortalTab('matrix');
+      } else if (role === 'VERIFIER') {
+        setPortalTab('verifier');
+      } else {
+        const inst = SYSTEM_STATE.institutions[role];
+        document.getElementById('inst-pid').innerText = inst.pid;
+        document.getElementById('inst-name').innerText = inst.name;
+        setPortalTab('upload');
+      }
+      renderPortalWorkspace();
+    }
+
+    function setPortalTab(tabId) {
+      SYSTEM_STATE.activeTab = tabId;
+
+      const tabs = [
+        { id: 'upload', tabBtn: 'nav-tab-upload', panel: 'panel-upload', title: 'Batch Data Submission' },
+        { id: 'ledger', tabBtn: 'nav-tab-ledger', panel: 'panel-ledger', title: 'Enrolled Student Master Register' },
+        { id: 'matrix', tabBtn: 'nav-tab-matrix', panel: 'panel-matrix', title: 'Regulatory Intake & Quota Matrix' },
+        { id: 'cases', tabBtn: 'nav-tab-cases', panel: 'panel-cases', title: 'Reconciliation & Multiple Enrolment Scrutiny' },
+        { id: 'verifier', tabBtn: 'nav-tab-verifier', panel: 'panel-verifier', title: 'Academic Verification & Employer Check' },
+        { id: 'audit', tabBtn: 'nav-tab-audit', panel: 'panel-audit', title: 'Security Audit & Regulatory Log' }
+      ];
+
+      tabs.forEach(t => {
+        const btn = document.getElementById(t.tabBtn);
+        const panel = document.getElementById(t.panel);
+        if (t.id === tabId) {
+          btn.classList.add('active');
+          panel.classList.remove('hidden');
+          document.getElementById('breadcrumb-text').innerText = t.title;
+        } else {
+          btn.classList.remove('active');
+          panel.classList.add('hidden');
+        }
+      });
+
+      renderPortalWorkspace();
+    }
+
+    // Render Workspaces
+    function renderPortalWorkspace() {
+      // 1. KPI Metrics
+      const totalIntake = 300;
+      const confirmed = SYSTEM_STATE.admissions.filter(a => a.status === 'CONFIRMED').length;
+      const withdrawn = SYSTEM_STATE.admissions.filter(a => a.status === 'WITHDRAWN').length;
+      const openCases = SYSTEM_STATE.cases.filter(c => c.status === 'OPEN').length;
+
+      document.getElementById('metric-intake').innerText = totalIntake;
+      document.getElementById('metric-admissions').innerText = confirmed;
+      document.getElementById('metric-cases').innerText = openCases;
+      document.getElementById('metric-withdrawals').innerText = withdrawn;
+      document.getElementById('nav-cases-badge').innerText = openCases;
+
+      // 2. Render Staging Table
+      const stagingTbody = document.getElementById('staging-tbody');
+      if (stagingTbody && SYSTEM_STATE.stagedBatch) {
+        stagingTbody.innerHTML = '';
+        SYSTEM_STATE.stagedBatch.rows.forEach(r => {
+          const badgeClass = r.status === 'VALID' ? 'tag-pass' : r.status === 'DUPLICATE' ? 'tag-dup' : 'tag-alert';
+          const actionBtn = r.issues.length > 0
+            ? `<button onclick="openDiagnosticModal(${r.rowNumber})" class="gov-btn gov-btn-danger gov-btn-sm">Inspect Issue (${r.issues.length})</button>`
+            : `<span class="status-tag tag-pass">Ready to Commit</span>`;
+
+          stagingTbody.innerHTML += `
+            <tr>
+              <td class="font-mono" style="text-align: center;">${r.rowNumber}</td>
+              <td class="font-mono">${r.sourceRecordId}</td>
+              <td style="font-weight: bold;">${r.studentName}</td>
+              <td class="font-mono">${r.apaarMasked}</td>
+              <td class="font-mono font-bold" style="color: #002147;">${r.programmeCode}</td>
+              <td>${r.seatCategory}</td>
+              <td>${r.route}</td>
+              <td><span class="status-tag ${badgeClass}">${r.status}</span></td>
+              <td style="text-align: right;">${actionBtn}</td>
+            </tr>
+          `;
+        });
+      }
+
+      // 3. Render Master Ledger
+      filterLedgerRecords();
+
+      // 4. Render Regulatory Matrix
+      renderMatrixRecords();
+
+      // 5. Render Cases
+      renderCasesRecords();
+
+      // 6. Render Audit
+      renderAuditRecords();
+    }
+
+    function filterLedgerRecords() {
+      const currentInst = SYSTEM_STATE.activeRole === 'BETA' ? 'BETA' : 'ALPHA';
+      const search = (document.getElementById('ledger-search-box')?.value || '').toLowerCase();
+      const statusF = document.getElementById('ledger-filter-box')?.value || 'ALL';
+
+      const filtered = SYSTEM_STATE.admissions.filter(a => {
+        if (a.instId !== currentInst) return false;
+        if (statusF !== 'ALL' && a.status !== statusF) return false;
+        if (search) {
+          const match = a.name.toLowerCase().includes(search) ||
+                        a.apaarMasked.includes(search) ||
+                        a.prog.toLowerCase().includes(search);
+          if (!match) return false;
+        }
+        return true;
+      });
+
+      document.getElementById('ledger-total-count').innerText = SYSTEM_STATE.admissions.filter(a => a.instId === currentInst).length;
+      const ledgerTbody = document.getElementById('ledger-tbody');
+      if (!ledgerTbody) return;
+      ledgerTbody.innerHTML = '';
+
+      filtered.forEach(adm => {
+        const badge = adm.status === 'CONFIRMED'
+          ? '<span class="status-tag tag-pass">CONFIRMED</span>'
+          : '<span class="status-tag tag-muted">WITHDRAWN</span>';
+
+        const action = adm.status === 'CONFIRMED'
+          ? `<button onclick="openWithdrawalModal('${adm.id}')" class="gov-btn gov-btn-danger gov-btn-sm">Record Withdrawal</button>`
+          : `<span class="font-mono" style="color: #777; font-size: 11px;">Audited</span>`;
+
+        ledgerTbody.innerHTML += `
+          <tr>
+            <td style="font-weight: bold;">${adm.name}</td>
+            <td class="font-mono">${adm.apaarMasked}</td>
+            <td class="font-mono font-bold" style="color: #002147;">${adm.prog}</td>
+            <td>${adm.category}</td>
+            <td>${adm.route}</td>
+            <td>${badge}</td>
+            <td class="font-mono">${adm.date}</td>
+            <td style="text-align: right;">${action}</td>
+          </tr>
+        `;
+      });
+    }
+
+    function renderMatrixRecords() {
+      const matrixTbody = document.getElementById('matrix-tbody');
+      if (!matrixTbody) return;
+      matrixTbody.innerHTML = '';
+
+      // Alpha CSE
+      const alphaCseAdmissions = SYSTEM_STATE.admissions.filter(a => a.instId === 'ALPHA' && a.prog === 'BTECH-CSE' && a.status === 'CONFIRMED');
+      const alphaNriCount = alphaCseAdmissions.filter(a => a.category === 'NRI').length;
+      const alphaFnCount = alphaCseAdmissions.filter(a => a.category === 'FN' || a.category === 'GULF_WORKER').length;
+      const isNriExceeded = alphaNriCount > 6; // 120 * 0.05 = 6
+
+      matrixTbody.innerHTML += `
+        <tr>
+          <td>
+            <strong style="color: #002147;">B.Tech Computer Science and Engineering</strong><br>
+            <span style="color: #555; font-size: 11px;">Alpha Institute of Technology (PID: 1-3324567891) • AY 2026-27</span>
+          </td>
+          <td style="text-align: right; font-family: monospace; font-weight: bold;">120</td>
+          <td style="text-align: right; font-family: monospace; font-weight: bold;">${alphaCseAdmissions.length}</td>
+          <td>
+            <div style="background: #e0e0e0; height: 10px; border-radius: 1px; width: 100px; margin-bottom: 2px;">
+              <div style="background: #002147; height: 10px; width: ${Math.min(100, (alphaCseAdmissions.length / 120) * 100)}%;"></div>
+            </div>
+            <span class="font-mono" style="font-size: 10px;">${Math.round((alphaCseAdmissions.length / 120) * 100)}% Utilised</span>
+          </td>
+          <td style="text-align: center; font-family: monospace;">
+            <strong>${alphaNriCount} / 6</strong><br>
+            ${isNriExceeded ? '<span class="status-tag tag-alert">EXCEEDS 5% CAP (APH CL. 2.11)</span>' : '<span class="status-tag tag-pass">COMPLIANT</span>'}
+          </td>
+          <td style="text-align: center; font-family: monospace;">
+            <strong>${alphaFnCount} / 18</strong><br>
+            <span style="font-size: 10px; color: #555;">(1/3 Gulf Wards Reserved)</span>
+          </td>
+          <td class="font-mono" style="text-align: center;">Isolated (2nd Yr)</td>
+          <td>
+            ${isNriExceeded ? '<span class="status-tag tag-warn">CATEGORY_ALERT (APH 2024-27)</span>' : '<span class="status-tag tag-pass">COMPLIANT</span>'}
+          </td>
+        </tr>
+      `;
+
+      // Beta CSE
+      const betaCseAdmissions = SYSTEM_STATE.admissions.filter(a => a.instId === 'BETA' && a.prog === 'BTECH-CSE' && a.status === 'CONFIRMED');
+      matrixTbody.innerHTML += `
+        <tr>
+          <td>
+            <strong style="color: #002147;">B.Tech Computer Science and Engineering</strong><br>
+            <span style="color: #555; font-size: 11px;">Beta College of Engineering (PID: 1-3324567892) • AY 2026-27</span>
+          </td>
+          <td style="text-align: right; font-family: monospace; font-weight: bold;">60</td>
+          <td style="text-align: right; font-family: monospace; font-weight: bold;">${betaCseAdmissions.length}</td>
+          <td>
+            <div style="background: #e0e0e0; height: 10px; border-radius: 1px; width: 100px; margin-bottom: 2px;">
+              <div style="background: #1b5e20; height: 10px; width: ${Math.min(100, (betaCseAdmissions.length / 60) * 100)}%;"></div>
+            </div>
+            <span class="font-mono" style="font-size: 10px;">${Math.round((betaCseAdmissions.length / 60) * 100)}% Utilised</span>
+          </td>
+          <td style="text-align: center; color: #777; font-size: 11px;">Not Sanctioned</td>
+          <td style="text-align: center; color: #777; font-size: 11px;">Not Sanctioned</td>
+          <td class="font-mono" style="text-align: center;">Isolated (2nd Yr)</td>
+          <td><span class="status-tag tag-pass">COMPLIANT</span></td>
+        </tr>
+      `;
+    }
+
+    function renderCasesRecords() {
+      const container = document.getElementById('cases-wrapper');
+      if (!container) return;
+      container.innerHTML = '';
+
+      SYSTEM_STATE.cases.forEach(c => {
+        const isResolved = c.status !== 'OPEN';
+        container.innerHTML += `
+          <div style="border: 1px solid #cfd8dc; background: #ffffff; padding: 12px; margin-bottom: 10px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 6px; margin-bottom: 8px;">
+              <div>
+                <span class="status-tag tag-alert" style="margin-right: 6px;">HIGH SEVERITY</span>
+                <span class="font-mono" style="font-weight: bold; color: #002147;">CASE REF: ${c.id}</span>
+                <span style="margin: 0 4px;">•</span>
+                <span style="font-weight: bold;">${c.caseType}</span>
+              </div>
+              <div>
+                <span class="status-tag ${isResolved ? 'tag-pass' : 'tag-warn'}">
+                  ${isResolved ? 'ADJUDICATED: ' + c.status : 'INVESTIGATION OPEN'}
+                </span>
+              </div>
+            </div>
+
+            <div style="font-size: 12px; margin-bottom: 6px;">
+              <strong>Candidate Subject:</strong> ${c.studentMaskedName} | <strong>Protected APAAR Token:</strong> <span class="font-mono">${c.apaarMasked}</span>
+            </div>
+            <p style="font-size: 11px; color: #444; margin-bottom: 8px;">
+              ${c.evidenceSummary}
+            </p>
+            <div style="font-size: 10px; color: #555; font-style: italic; margin-bottom: 10px;">
+              Statutory Basis: ${c.policyClauseRef}
+            </div>
+
+            <div style="text-align: right;">
+              ${!isResolved ? `
+                <button onclick="openCaseModal('${c.id}')" class="gov-btn gov-btn-primary gov-btn-sm">
+                  Adjudicate Case Findings
+                </button>
+              ` : `
+                <span class="font-mono" style="font-size: 11px; color: #1b5e20; font-weight: bold;">
+                  Decision Recorded & Audited by Regulatory Bureau
+                </span>
+              `}
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    function renderAuditRecords() {
+      const auditTbody = document.getElementById('audit-tbody');
+      if (!auditTbody) return;
+      auditTbody.innerHTML = '';
+
+      SYSTEM_STATE.auditLogs.forEach(log => {
+        auditTbody.innerHTML += `
+          <tr>
+            <td style="color: #555;">${log.time}</td>
+            <td style="font-weight: bold; color: #002147;">${log.role}</td>
+            <td style="font-weight: bold; color: #0b457a;">${log.action}</td>
+            <td style="color: #37474f;">${log.target}</td>
+            <td style="color: #455a64; word-break: break-all;">${log.details}</td>
+          </tr>
+        `;
+      });
+    }
+
+    // --- ACTIONS ---
+    function downloadOfficialTemplate() {
+      const csv = "source_record_id,student_name,apaar_reference,programme_code,admission_route,seat_category,entry_type,admission_date\n" +
+        "ADM-2026-001,Vikramaditya Rao,900000005001,BTECH-CSE,STATE_COUNSELLING,GENERAL,FIRST_YEAR,2026-08-10\n" +
+        "ADM-2026-002,Ananya Deshmukh,900000005002,BTECH-CSE,STATE_COUNSELLING,OBC_NCL,FIRST_YEAR,2026-08-10\n" +
+        "ADM-2026-003,Rohan Verma,900000005003,BTECH-CSE,NRI,NRI,FIRST_YEAR,2026-08-11\n" +
+        "ADM-2026-004,Mohammed Zaid Khan,900000005004,BTECH-CSE,FN_OCI_GULF,GULF_WORKER,FIRST_YEAR,2026-08-11\n" +
+        "ADM-2026-005,Deepika Sundaram,90000000000X,BTECH-CSE,STATE_COUNSELLING,GENERAL,FIRST_YEAR,2026-08-12\n";
+
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'AICTE_Student_Admission_Template_2026.csv';
+      a.click();
+    }
+
+    function showGovNotice(title, heading, bodyHtml, isSuccess = true) {
+      document.getElementById('gov-ack-title').innerText = title.toUpperCase();
+
+      const headingBox = document.getElementById('gov-ack-heading-box');
+      const headingElem = document.getElementById('gov-ack-heading');
+      headingElem.innerHTML = heading;
+
+      if (!isSuccess) {
+        headingBox.style.backgroundColor = '#ffebee';
+        headingBox.style.borderColor = '#ef9a9a';
+        headingBox.style.borderLeftColor = '#c62828';
+        headingElem.style.color = '#b71c1c';
+      } else {
+        headingBox.style.backgroundColor = '#e8f5e9';
+        headingBox.style.borderColor = '#a5d6a7';
+        headingBox.style.borderLeftColor = '#2e7d32';
+        headingElem.style.color = '#1b5e20';
+      }
+
+      document.getElementById('gov-ack-body').innerHTML = bodyHtml;
+
+      const randNum = Math.floor(100000 + Math.random() * 900000);
+      document.getElementById('gov-ack-ref').innerText = `REG-ORDER-2026-${randNum}`;
+
+      const now = new Date();
+      const timeStr = now.toISOString().replace('T', ' ').slice(0, 19) + ' IST';
+      document.getElementById('gov-ack-time').innerText = timeStr;
+
+      document.getElementById('modal-gov-acknowledgement').classList.remove('hidden');
+    }
+
+    function processStagedBatchFile() {
+      const bodyHtml = `
+        <p style="margin-bottom: 8px;">
+          Batch File <strong>'aicte_admissions_august.csv'</strong> received and evaluated against the national regulatory invariant ruleset.
+        </p>
+        <table class="table-form" style="margin-bottom: 10px;">
+          <colgroup>
+            <col style="width: 40%;">
+            <col style="width: 60%;">
+          </colgroup>
+          <tbody>
+            <tr>
+              <td class="label-col">Total Rows Ingested:</td>
+              <td class="value-col" style="font-weight: bold;">4 Candidate Records</td>
+            </tr>
+            <tr>
+              <td class="label-col">Valid Verified Records:</td>
+              <td class="value-col" style="color: #1b5e20; font-weight: bold;">2 Records (Passed Invariants 1–12)</td>
+            </tr>
+            <tr>
+              <td class="label-col">Flagged Quarantined:</td>
+              <td class="value-col" style="color: #b71c1c; font-weight: bold;">2 Issues (1 Malformed APAAR Syntax, 1 Staging Duplicate)</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="font-size: 11px; color: #555;">
+          Non-compliant records have been quarantined for institutional diagnostic scrutiny. Valid records are prepared for final certification.
+        </p>
+      `;
+      showGovNotice(
+        "AICTE Ingestion Status Acknowledgement",
+        "Admissions Batch Ingested & Staged Successfully",
+        bodyHtml,
+        true
+      );
+      renderPortalWorkspace();
+    }
+
+    function certifyStagedBatch() {
+      if (!SYSTEM_STATE.stagedBatch) return;
+
+      // Commit valid rows
+      SYSTEM_STATE.stagedBatch.rows.filter(r => r.status === 'VALID').forEach(r => {
+        SYSTEM_STATE.admissions.push({
+          id: `ADM-COMMIT-${r.rowNumber}`,
+          instId: 'ALPHA',
+          name: r.studentName,
+          apaarMasked: r.apaarMasked,
+          prog: r.programmeCode,
+          category: r.seatCategory,
+          route: r.route,
+          status: 'CONFIRMED',
+          date: '2026-08-15'
+        });
+      });
+
+      // Audit Log
+      SYSTEM_STATE.auditLogs.unshift({
+        time: new Date().toISOString().replace('T', ' ').slice(0, 19),
+        role: 'INSTITUTE_ADMIN',
+        action: 'BATCH_CERTIFIED',
+        target: 'submission_batches:BATCH-2026-AUG-01',
+        details: '{"committedRows":2,"certifiedBy":"Principal / Head of Institution"}'
+      });
+
+      const bodyHtml = `
+        <p style="margin-bottom: 8px;">
+          Batch <strong>BATCH-2026-AUG-01</strong> has been formally certified by the Head of Institution and committed to the national admissions ledger.
+        </p>
+        <table class="table-form" style="margin-bottom: 10px;">
+          <colgroup>
+            <col style="width: 35%;">
+            <col style="width: 65%;">
+          </colgroup>
+          <tbody>
+            <tr>
+              <td class="label-col">Batch Reference:</td>
+              <td class="value-col font-mono" style="font-weight: bold; color: #002147;">BATCH-2026-AUG-01</td>
+            </tr>
+            <tr>
+              <td class="label-col">Records Committed:</td>
+              <td class="value-col" style="font-weight: bold; color: #1b5e20;">2 Valid Candidate Admissions</td>
+            </tr>
+            <tr>
+              <td class="label-col">National Ledger Sync:</td>
+              <td class="value-col"><span class="status-tag tag-pass">SYNCHRONIZED WITH CENTRAL VAULT</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="font-size: 11px; color: #555;">
+          Approved seat intake counts have been adjusted for Alpha Institute of Technology.
+        </p>
+      `;
+
+      showGovNotice(
+        "Statutory Admission Certification Acknowledgement",
+        "Batch BATCH-2026-AUG-01 Certified by Head of Institution",
+        bodyHtml,
+        true
+      );
+      renderPortalWorkspace();
+    }
+
+    function openDiagnosticModal(rowNum) {
+      const row = SYSTEM_STATE.stagedBatch?.rows.find(r => r.rowNumber === rowNum);
+      if (!row) return;
+
+      document.getElementById('diag-name').innerText = row.studentName;
+      document.getElementById('diag-src-id').innerText = row.sourceRecordId;
+      document.getElementById('diag-val').innerText = row.apaarRaw;
+      document.getElementById('diag-err-code').innerText = row.issues[0]?.code || 'ERROR';
+      document.getElementById('diag-err-msg').innerText = row.issues[0]?.msg || 'Validation issue detected.';
+
+      document.getElementById('modal-diagnostic').classList.remove('hidden');
+    }
+
+    function openWithdrawalModal(id) {
+      SYSTEM_STATE.pendingWdId = id;
+      const adm = SYSTEM_STATE.admissions.find(a => a.id === id);
+      if (!adm) return;
+
+      document.getElementById('wd-candidate-name').innerText = adm.name;
+      document.getElementById('wd-candidate-apaar').innerText = adm.apaarMasked;
+      document.getElementById('wd-candidate-prog').innerText = adm.prog;
+
+      document.getElementById('modal-withdrawal').classList.remove('hidden');
+    }
+
+    function confirmStudentWithdrawal() {
+      if (!SYSTEM_STATE.pendingWdId) return;
+      const adm = SYSTEM_STATE.admissions.find(a => a.id === SYSTEM_STATE.pendingWdId);
+      if (!adm) return;
+
+      const reason = document.getElementById('wd-reason-text').value;
+      adm.status = 'WITHDRAWN';
+
+      SYSTEM_STATE.auditLogs.unshift({
+        time: new Date().toISOString().replace('T', ' ').slice(0, 19),
+        role: 'INSTITUTE_ADMIN',
+        action: 'ADMISSION_WITHDRAWAL',
+        target: `admissions:${adm.id}`,
+        details: JSON.stringify({ student: adm.name, reason: reason.slice(0, 60) })
+      });
+
+      closeModal('modal-withdrawal');
+
+      const bodyHtml = `
+        <p style="margin-bottom: 8px;">
+          Official withdrawal order recorded in compliance with AICTE Invariant 11 (Student Seat Relinquishment).
+        </p>
+        <table class="table-form" style="margin-bottom: 10px;">
+          <colgroup>
+            <col style="width: 30%;">
+            <col style="width: 70%;">
+          </colgroup>
+          <tbody>
+            <tr>
+              <td class="label-col">Candidate Name:</td>
+              <td class="value-col" style="font-weight: bold; color: #002147;">${adm.name}</td>
+            </tr>
+            <tr>
+              <td class="label-col">APAAR Reference:</td>
+              <td class="value-col font-mono">${adm.apaarMasked}</td>
+            </tr>
+            <tr>
+              <td class="label-col">Programme:</td>
+              <td class="value-col font-mono" style="font-weight: bold;">${adm.prog}</td>
+            </tr>
+            <tr>
+              <td class="label-col">Recorded Reason:</td>
+              <td class="value-col" style="font-style: italic;">"${reason}"</td>
+            </tr>
+            <tr>
+              <td class="label-col">Quota Action:</td>
+              <td class="value-col" style="color: #1b5e20; font-weight: bold;">Seat capacity released for subsequent round allocation</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="font-size: 11px; color: #555;">
+          Active enrolment counts adjusted; historical event preserved permanently in audit trail.
+        </p>
+      `;
+
+      showGovNotice(
+        "Official Enrolment Withdrawal Order",
+        `Withdrawal Recorded for ${adm.name}`,
+        bodyHtml,
+        true
+      );
+      renderPortalWorkspace();
+    }
+
+    function openCaseModal(id) {
+      document.getElementById('modal-case-adjudicate').classList.remove('hidden');
+    }
+
+    function adjudicateRegulatoryCase(decision) {
+      const c = SYSTEM_STATE.cases[0];
+      if (!c) return;
+
+      c.status = decision;
+      const notes = document.getElementById('case-decision-input').value;
+
+      SYSTEM_STATE.auditLogs.unshift({
+        time: new Date().toISOString().replace('T', ' ').slice(0, 19),
+        role: 'REGULATORY_OFFICER',
+        action: 'CASE_ADJUDICATED',
+        target: `cases:${c.id}`,
+        details: JSON.stringify({ decision, notes: notes.slice(0, 70) })
+      });
+
+      closeModal('modal-case-adjudicate');
+
+      const decisionMeta = {
+        'FALSE_POSITIVE': {
+          title: 'AICTE Adjudication Bench Order — False Positive Closed',
+          heading: 'Permitted Concurrent Enrolment Order Issued',
+          desc: 'The regulatory officer has confirmed compliance with UGC Simultaneous Academic Programmes Guidelines. The concurrency alert has been dismissed as a permissible combination (Physical Technical Course + Permissible Shift / Second Mode).',
+          isSuccess: true
+        },
+        'CORRECTION_REQUESTED': {
+          title: 'AICTE Adjudication Bench Order — Clarification Directive',
+          heading: 'Institutional Clarification & Schedule Verification Ordered',
+          desc: 'Adjudication order issued requiring both affiliated institutions to upload authenticated class attendance timetables and shift verification within 7 working days.',
+          isSuccess: true
+        },
+        'RESOLVED': {
+          title: 'AICTE Adjudication Bench Order — Statutory Show Cause',
+          heading: 'Statutory Notice Issued: Invariant 10 Violation Confirmed',
+          desc: 'Unlawful simultaneous enrolment confirmed across overlapping full-time morning day shifts. Formal show cause notice dispatched to candidate and secondary institution.',
+          isSuccess: false
+        }
+      };
+
+      const meta = decisionMeta[decision] || {
+        title: 'AICTE Adjudication Bench Order',
+        heading: `Adjudication Order Issued: ${decision}`,
+        desc: 'Permanent regulatory provenance recorded in central registry.',
+        isSuccess: true
+      };
+
+      const bodyHtml = `
+        <table class="table-form" style="margin-bottom: 10px;">
+          <colgroup>
+            <col style="width: 28%;">
+            <col style="width: 72%;">
+          </colgroup>
+          <tbody>
+            <tr>
+              <td class="label-col">Candidate Subject:</td>
+              <td class="value-col" style="font-weight: bold; color: #002147;">Aryan Sharma (Protected APAAR: <span class="font-mono">XXXXXXXX0300</span>)</td>
+            </tr>
+            <tr>
+              <td class="label-col">Adjudication Ruling:</td>
+              <td class="value-col" style="font-weight: bold;">${decision}</td>
+            </tr>
+            <tr>
+              <td class="label-col">Adjudicator Notes:</td>
+              <td class="value-col" style="font-style: italic; color: #37474f;">"${notes}"</td>
+            </tr>
+            <tr>
+              <td class="label-col">Statutory Authority:</td>
+              <td class="value-col">AICTE Approval Process Handbook (Clause 10 & 11) / UGC Simultaneous Academic Programmes Notification</td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="font-size: 11px; color: #334155; line-height: 1.5;">
+          ${meta.desc}<br>
+          Automated compliance directives recorded for <strong>Alpha Institute of Technology</strong> and <strong>Beta College of Engineering</strong>.
+        </div>
+      `;
+
+      showGovNotice(meta.title, meta.heading, bodyHtml, meta.isSuccess);
+      renderPortalWorkspace();
+    }
+
+    function executeVerificationCheck() {
+      const org = document.getElementById('vf-org-input').value;
+      const purpose = document.getElementById('vf-purpose-select').value;
+      const ref = document.getElementById('vf-ref-input').value || 'STU-0042';
+
+      document.getElementById('cert-requestor-org').innerText = org;
+      document.getElementById('cert-candidate-token').innerText = ref;
+
+      SYSTEM_STATE.auditLogs.unshift({
+        time: new Date().toISOString().replace('T', ' ').slice(0, 19),
+        role: 'VERIFIER',
+        action: 'DISCLOSURE_REQUESTED',
+        target: 'verifications:VERIF-2026-990142',
+        details: JSON.stringify({ org, purpose, studentRef: ref })
+      });
+
+      document.getElementById('cert-official-document').scrollIntoView({ behavior: 'smooth' });
+      renderAuditRecords();
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.add('hidden');
+    }
+
+    // Click on backdrop (outside modal window) to close
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.modal-overlay').forEach(overlay => {
+        overlay.addEventListener('click', function(e) {
+          if (e.target === this) {
+            this.classList.add('hidden');
+          }
+        });
+      });
+    });
+
+    // Initialize on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      initPortalData();
+    });
+  </script>
+</body>
+</html>
