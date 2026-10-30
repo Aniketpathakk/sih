@@ -1,0 +1,25 @@
+{
+  "name": "apaar-shield",
+  "version": "1.0.0",
+  "private": true,
+  "description": "National Academic Identity, Student Enrolment Integrity & Regulatory Intelligence Platform",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "test": "npm run test --workspaces --if-present",
+    "test:policy": "npm --workspace=packages/policy-fixtures test",
+    "test:identity": "npm --workspace=apps/api test",
+    "dev:api": "npm --workspace=apps/api run dev",
+    "dev:web": "npm --workspace=apps/web run dev",
+    "dev": "concurrently \"npm run dev:api\" \"npm run dev:web\"",
+    "seed": "npm --workspace=apps/api run seed"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "typescript": "^5.7.3"
+  }
+}
+
