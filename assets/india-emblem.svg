@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 130" width="45" height="58">
+  <!-- State Emblem of India representation (Ashoka Lion Capital) -->
+  <g fill="#002147">
+    <!-- Abacus Top Line -->
+    <rect x="15" y="88" width="70" height="3" rx="0.5"/>
+    
+    <!-- Dharma Chakra in Center -->
+    <circle cx="50" cy="98" r="8" fill="none" stroke="#002147" stroke-width="1.8"/>
+    <circle cx="50" cy="98" r="2" fill="#002147"/>
+    <!-- Spokes -->
+    <path d="M50 90 L50 106 M42 98 L58 98 M44 92 L56 104 M44 104 L56 92" stroke="#002147" stroke-width="0.8"/>
+    
+    <!-- Bull on Right, Horse on Left silhouettes -->
+    <!-- Horse (Left) -->
+    <path d="M22 93 C20 95 24 99 26 102 L22 103 L24 104 L34 104 C32 101 30 96 26 95 Z"/>
+    <!-- Bull (Right) -->
+    <path d="M78 93 C80 95 76 99 74 102 L78 103 L76 104 L66 104 C68 101 70 96 74 95 Z"/>
+
+    <!-- Bell Capital (Inverted Lotus) -->
+    <path d="M20 108 C30 116 70 116 80 108 L84 112 C72 122 28 122 16 112 Z"/>
+
+    <!-- Three Lions (Stylized Silhouette) -->
+    <!-- Central Lion Head & Mane -->
+    <path d="M42 22 C42 12 58 12 58 22 C64 22 66 32 64 42 C64 56 60 74 62 86 L38 86 C40 74 36 56 36 42 C34 32 36 22 42 22 Z"/>
+    <!-- Central Lion Crown / Snout -->
+    <ellipse cx="50" cy="24" rx="6" ry="7" fill="#FFFFFF"/>
+    <path d="M46 22 L54 22 L50 28 Z"/>
+    <circle cx="47" cy="20" r="1"/>
+    <circle cx="53" cy="20" r="1"/>
+
+    <!-- Left Lion Head -->
+    <path d="M24 30 C20 24 34 20 38 28 C38 42 34 60 38 86 L28 86 C24 72 20 54 22 42 Z"/>
+    <circle cx="28" cy="27" r="1"/>
+
+    <!-- Right Lion Head -->
+    <path d="M76 30 C80 24 66 20 62 28 C62 42 66 60 62 86 L72 86 C76 72 80 54 78 42 Z"/>
+    <circle cx="72" cy="27" r="1"/>
+
+    <!-- Text: सत्यमेव जयते -->
+    <text x="50" y="128" font-family="'Segoe UI', Arial, sans-serif" font-size="7.5" font-weight="bold" text-anchor="middle" letter-spacing="0.4">
+      सत्यमेव जयते
+    </text>
+  </g>
+</svg>
+

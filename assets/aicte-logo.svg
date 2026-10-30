@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="60" height="60">
+  <defs>
+    <radialGradient id="diyaGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFD700" />
+      <stop offset="100%" stop-color="#FF9933" />
+    </radialGradient>
+  </defs>
+  <!-- Outer Gear / Cogwheel Ring (AICTE Technical symbol) -->
+  <circle cx="80" cy="80" r="74" fill="#002147" stroke="#FF9933" stroke-width="3"/>
+  
+  <!-- Gear Teeth -->
+  <g fill="#FF9933">
+    <rect x="76" y="2" width="8" height="8" rx="1"/>
+    <rect x="76" y="150" width="8" height="8" rx="1"/>
+    <rect x="2" y="76" width="8" height="8" rx="1"/>
+    <rect x="150" y="76" width="8" height="8" rx="1"/>
+    <rect x="25" y="25" width="8" height="8" rx="1" transform="rotate(45 29 29)"/>
+    <rect x="127" y="127" width="8" height="8" rx="1" transform="rotate(45 131 131)"/>
+    <rect x="127" y="25" width="8" height="8" rx="1" transform="rotate(-45 131 29)"/>
+    <rect x="25" y="127" width="8" height="8" rx="1" transform="rotate(-45 29 131)"/>
+  </g>
+
+  <!-- Inner Circle -->
+  <circle cx="80" cy="80" r="62" fill="#FFFFFF" stroke="#002147" stroke-width="2"/>
+
+  <!-- AICTE Traditional Diya (Lamp of Knowledge) -->
+  <path d="M52 92 C52 108 108 108 108 92 C108 86 52 86 52 92 Z" fill="#002147"/>
+  <!-- Lamp Base -->
+  <path d="M72 104 L88 104 L94 116 L66 116 Z" fill="#002147"/>
+  <rect x="62" y="116" width="36" height="4" fill="#FF9933"/>
+
+  <!-- Flame of Wisdom -->
+  <path d="M80 50 C86 64 92 74 88 84 C84 88 76 88 72 84 C68 74 74 64 80 50 Z" fill="url(#diyaGlow)"/>
+  <path d="M80 60 C83 68 86 74 84 80 C82 82 78 82 76 80 C74 74 77 68 80 60 Z" fill="#FFFFFF" opacity="0.8"/>
+
+  <!-- Text Arc / Motto: योगः कर्मसु कौशलम् -->
+  <path id="textPathTop" d="M 28 80 A 52 52 0 0 1 132 80" fill="none"/>
+  <text font-family="Arial, 'Segoe UI', sans-serif" font-size="10" font-weight="bold" fill="#002147">
+    <textPath href="#textPathTop" startOffset="50%" text-anchor="middle">
+      AICTE • नई दिल्ली
+    </textPath>
+  </text>
+
+  <path id="textPathBottom" d="M 134 82 A 54 54 0 0 1 26 82" fill="none"/>
+  <text font-family="'Segoe UI', Arial, sans-serif" font-size="8.5" font-weight="bold" fill="#002147">
+    <textPath href="#textPathBottom" startOffset="50%" text-anchor="middle">
+      योगः कर्मसु कौशलम्
+    </textPath>
+  </text>
+</svg>
+

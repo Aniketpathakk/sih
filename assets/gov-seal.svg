@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" width="110" height="110">
+  <!-- Official Government Verified Circular Stamp -->
+  <circle cx="70" cy="70" r="66" fill="none" stroke="#003366" stroke-width="2.5" stroke-dasharray="4,2"/>
+  <circle cx="70" cy="70" r="60" fill="none" stroke="#003366" stroke-width="1.2"/>
+  <circle cx="70" cy="70" r="42" fill="none" stroke="#003366" stroke-width="1"/>
+
+  <path id="stampCurveTop" d="M 22 70 A 48 48 0 0 1 118 70" fill="none"/>
+  <text font-family="Arial, 'Segoe UI', sans-serif" font-size="8.5" font-weight="bold" fill="#003366" letter-spacing="1">
+    <textPath href="#stampCurveTop" startOffset="50%" text-anchor="middle">
+      AICTE • REGULATION BUREAU
+    </textPath>
+  </text>
+
+  <path id="stampCurveBottom" d="M 118 70 A 48 48 0 0 1 22 70" fill="none"/>
+  <text font-family="Arial, 'Segoe UI', sans-serif" font-size="8" font-weight="bold" fill="#003366" letter-spacing="0.5">
+    <textPath href="#stampCurveBottom" startOffset="50%" text-anchor="middle">
+      DIGITALLY VERIFIED RECORD
+    </textPath>
+  </text>
+
+  <!-- Center Verification Text -->
+  <g text-anchor="middle" font-family="Arial, 'Segoe UI', sans-serif" fill="#003366">
+    <text x="70" y="62" font-size="8" font-weight="bold">GOVT. OF INDIA</text>
+    <text x="70" y="74" font-size="12" font-weight="900" fill="#1b5e20">CONFIRMED</text>
+    <text x="70" y="84" font-size="7.5" font-weight="bold">AY 2026-2027</text>
+  </g>
+</svg>
+
